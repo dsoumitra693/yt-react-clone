@@ -3,26 +3,31 @@ import { Box, Typography, Stack } from "@mui/material"
 import { SideBar, Videos } from './'
 import { fetchFromAPI } from '../utils/fetchApi'
 import LoadingHandler from './LoadingHandler'
+import axios from 'axios'
 
 const Feed = ({ selectedCategorie, setSelectedCategorie }) => {
   const [videos, setVideos] = useState([])
   const [loadErr, setLoadErr] = useState({})
   const [reload, setReload] = useState(0)
   useEffect(() => {
+    const cancelToken = axios.CancelToken.source()
     setLoadErr({})
-    fetchFromAPI(`${selectedCategorie}`)
+    fetchFromAPI(`${selectedCategorie}`, cancelToken)
       .then((data) => {
         setVideos(data.items)
       }).catch((err) => {
         setLoadErr(err)
-        console.log(err)
       })
+
+      return () => {
+        cancelToken.cancel()
+      }
   }, [selectedCategorie, reload])
 
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box sx={{
-        height: { sm: 'auto', md: "92vh" },
+        height: { sm: 'auto', md: "90vh" },
         border: '1px solid #3d3d3d', px: { sm: 0, md: 2 }
       }}>
         <SideBar selectedCategorie={selectedCategorie} setSelectedCategorie={setSelectedCategorie} />

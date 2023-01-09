@@ -6,23 +6,27 @@ import { Box, Button, CircularProgress, Stack, Typography } from "@mui/material"
 import { fetchFromAPI } from '../utils/fetchApi'
 import { CheckCircle } from '@mui/icons-material'
 import { numFormat } from '../utils/numberFormater'
+import axios from 'axios'
 
 const VideoDetails = () => {
   const { id } = useParams()
   const [videoDetails, setVideoDetails] = useState(null)
   const [relatedVideos, setRelatedVideos] = useState([])
   useEffect(() => {
+    const cancelToken = axios.CancelToken.source()
     fetchFromAPI(`video/${id}`).then((data) => {
       setVideoDetails(data?.items[0])
     })
     fetchFromAPI(`related-video/${id}`).then((data) => {
       setRelatedVideos(data.items)
     })
+    return () =>{
+      cancelToken.cancel()
+    }
   }, [id])
   const [pipMode, setPipMode] = useState(false);
 
   const togglePIP = () => {
-    console.log(pipMode)
     setPipMode(prev => !prev);
   }
   if (!videoDetails) return (

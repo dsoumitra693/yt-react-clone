@@ -43,6 +43,7 @@ a {
   border:none;
   outline:none;
   width:350px;
+  z-index: 1000;
 }
 
 .category-btn{
@@ -85,4 +86,20 @@ a {
   .search-bar{
     width:200px;
   }
+}
+.live_tag{
+  background-color: #FC1503;
+  color: #fff;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  width: 4rem;
+  height: 1.5rem;
+  padding: 0.1rem;
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  font-size: 1rem;
+  right: .2rem;
+  top: calc(180px - 2rem);
+  border-radius: .2rem;
 }

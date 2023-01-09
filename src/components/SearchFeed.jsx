@@ -4,6 +4,7 @@ import { Videos } from './'
 import { fetchFromAPI } from '../utils/fetchApi'
 import { useParams } from 'react-router-dom'
 import LoadingHandler from './LoadingHandler'
+import axios from 'axios'
 
 const Feed = () => {
   const { searchTerm } = useParams()
@@ -11,13 +12,17 @@ const Feed = () => {
   const [loadErr, setLoadErr] = useState("")
   const [reload, setReload] = useState(0)
   useEffect(() => {
+    const cancelToken = axios.CancelToken.source()
     setLoadErr("")
-    fetchFromAPI(`search/${searchTerm}`)
+    fetchFromAPI(`search/${searchTerm}`, cancelToken)
       .then((data) => {
         setVideos(data.items)
       }).catch((err) => {
         setLoadErr(err)
       })
+      return () =>{
+        cancelToken.cancel()
+      }
   }, [searchTerm, reload])
 
   

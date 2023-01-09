@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Box } from '@mui/material'
 import { Videos, ChannelCard } from './'
 import { fetchFromAPI } from '../utils/fetchApi'
+import axios from 'axios'
 
 
 const ChannelDetails = () => {
@@ -10,14 +11,19 @@ const ChannelDetails = () => {
   const [channelDetails, setChannelDetails] = useState(null)
   const [videos, setVideos] = useState([])
   useEffect(() => {
-    fetchFromAPI(`channels/${id}`)
+    const cancelToken = axios.CancelToken.source()
+    fetchFromAPI(`channels/${id}`, cancelToken)
     .then((data)=>{
       setChannelDetails(data?.items[0])
     })
-    fetchFromAPI(`channel-video/${id}`)
+    fetchFromAPI(`channel-video/${id}`, cancelToken)
     .then((data)=>{
       setVideos(data?.items)
     })
+    return () =>{
+      cancelToken.cancel()
+    }
+
   }, [id])
   
   return (
