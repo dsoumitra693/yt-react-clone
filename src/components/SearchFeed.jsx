@@ -18,7 +18,9 @@ const Feed = () => {
       .then((data) => {
         setVideos(data.items)
       }).catch((err) => {
-        setLoadErr(err)
+        if(!axios.isCancel(err)){
+          setLoadErr(err)
+        }
       })
       return () =>{
         cancelToken.cancel()
