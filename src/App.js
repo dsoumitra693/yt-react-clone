@@ -1,9 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Box } from '@mui/material'
-import { NavBar, Feed, SearchFeed, VideoDetails, ChannelDetails } from "./components";
+import { NavBar, Feed, SearchFeed, VideoDetails, ChannelDetails, Page404 } from "./components";
 import { useState } from "react";
 import { VideoTest } from "./components/VideoTest";
-import { Page404 } from "./components/Page404";
 
 
 const App = () => {
