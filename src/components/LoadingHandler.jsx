@@ -16,7 +16,7 @@ const LoadingHandler = ({ mainDependency, loadErr, reload, setReload }) => {
                         </Typography>
                         <Button
                             sx={{ borderRadius: "20px", border: "1px solid rgba(255, 255, 255, 0.4)", }}
-                            onClick={()=> setReload(prev=> ++prev)}
+                            onClick={() => setReload(prev => ++prev)}
                         > Retry </Button>
                     </>}
             </Box>
