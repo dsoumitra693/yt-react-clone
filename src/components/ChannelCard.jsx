@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { demoProfilePicture } from "../utils/constants"
 import { numFormat } from "../utils/numberFormater"
 
-const ChannelCard = ({ channel, marginTop}) => {
+const ChannelCard = ({ channel, marginTop }) => {
   return (
     <Card sx={{
       CardShadow: 'none',

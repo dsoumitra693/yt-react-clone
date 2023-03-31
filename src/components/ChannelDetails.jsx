@@ -16,7 +16,7 @@ const ChannelDetails = () => {
     .then((data)=>{
       setChannelDetails(data?.items[0])
     })
-    fetchFromAPI(`channel-video/${id}`, cancelToken)
+    fetchFromAPI(`channel/video/${id}`, cancelToken)
     .then((data)=>{
       setVideos(data?.items)
     })

@@ -1,7 +1,7 @@
 import { Box, Button, CircularProgress, Typography } from '@mui/material'
 import React from 'react'
 
-const LoadingHandler = ({ mainDependency, loadErr, reload, setReload }) => {
+const LoadingHandler = ({ mainDependency, loadErr, setReload }) => {
     return (<>
         {mainDependency.length === 0 &&
             <Box

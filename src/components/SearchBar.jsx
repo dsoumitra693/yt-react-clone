@@ -4,6 +4,10 @@ import { Paper, IconButton } from "@mui/material"
 import { Search } from '@mui/icons-material'
 const SearchBar = () => {
     const [SearchValue, setSearchValue] = useState('')
+    const handleInput = (evt) => {
+        setSearchValue(evt.target.value)
+        evt.target.value = ''
+    }
     return (
         <Paper component="form"
             onSubmit={() => { }}
@@ -14,19 +18,16 @@ const SearchBar = () => {
                 border: '1px solid #e3e3e3',
                 mr: { sm: 5, }
             }}>
-            <input 
-            className="search-bar" 
-            placeholder="Search..."
-            value={SearchValue}
-            onChange={(e)=>{
-                setSearchValue(e.target.value)
-                e.target.value = '';
-            }} 
+            <input
+                className="search-bar"
+                placeholder="Search..."
+                value={SearchValue}
+                onChange={handleInput}
             />
             <Link to={`/search/${SearchValue}`}>
-            <IconButton type="submit" sx={{p: '10px', color: 'red'}}>
-                <Search/>
-            </IconButton>
+                <IconButton type="submit" sx={{ p: '10px', color: 'red' }}>
+                    <Search />
+                </IconButton>
             </Link>
         </Paper>
     )

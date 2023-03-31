@@ -9,6 +9,7 @@ const Feed = ({ selectedCategorie, setSelectedCategorie }) => {
   const [videos, setVideos] = useState([])
   const [loadErr, setLoadErr] = useState({})
   const [reload, setReload] = useState(0)
+  
   useEffect(() => {
     const cancelToken = axios.CancelToken.source()
     setLoadErr({})
@@ -45,7 +46,7 @@ const Feed = ({ selectedCategorie, setSelectedCategorie }) => {
             color: "#fc1503"
           }}> Videos</span>
         </Typography>
-        <LoadingHandler mainDependency={videos} loadErr={loadErr} reload={reload} setReload={setReload}/>
+        <LoadingHandler mainDependency={videos} loadErr={loadErr} setReload={setReload}/>
         {!!videos.length && <Videos videos={videos} />}
       </Box>
     </Stack>
